@@ -60,6 +60,11 @@ export function NotificationsPage() {
           <div className="p-6">
             <SkeletonLines />
           </div>
+        ) : query.isError ? (
+          <div className="flex flex-col gap-2 px-6 py-10 text-center">
+            <p className="text-sm font-medium text-danger">{t.notificationsLoadFailed}</p>
+            <p className="text-xs text-content-muted">{t.notificationsLoadFailedHint}</p>
+          </div>
         ) : query.data?.notifications?.length ? (
           <ul className="divide-y divide-border-subtle">
             {query.data.notifications.map((n) => (
