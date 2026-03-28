@@ -50,9 +50,20 @@ const NONCE_TTL_SECONDS = Number(process.env.NONCE_TTL_SECONDS || 300);
 const RATE_LIMIT_WINDOW_MS = Number(process.env.RATE_LIMIT_WINDOW_MS || 60_000);
 const RATE_LIMIT_MAX_REQUESTS = Number(process.env.RATE_LIMIT_MAX_REQUESTS || 80);
 const APP_DOMAIN = process.env.APP_DOMAIN || 'localhost';
+function normalizeOrigin(value) {
+  const s = String(value || '').trim();
+  if (!s) return '';
+  try {
+    const u = new URL(s);
+    return `${u.protocol}//${u.host}`;
+  } catch {
+    return s.replace(/\/+$/, '');
+  }
+}
+
 const CORS_ORIGINS = (process.env.CORS_ORIGINS || '')
   .split(',')
-  .map((item) => item.trim())
+  .map((item) => normalizeOrigin(item))
   .filter(Boolean);
 
 const ADMIN_ADDRESSES = new Set(
@@ -79,7 +90,12 @@ if (NODE_ENV === 'production' && (!process.env.JWT_SECRET || JWT_SECRET === 'blo
 
 const rateBuckets = new Map();
 
-app.use(helmet());
+// same-origin по умолчанию ломает fetch с Vercel → Render; для публичного API нужен cross-origin
+app.use(
+  helmet({
+    crossOriginResourcePolicy: { policy: 'cross-origin' }
+  })
+);
 app.use(
   cors({
     origin(origin, callback) {
@@ -88,7 +104,8 @@ app.use(
       }
 
       const localPattern = /^https?:\/\/(localhost|127\.0\.0\.1)(:\d+)?$/;
-      if (localPattern.test(origin) || CORS_ORIGINS.includes(origin)) {
+      const reqOrigin = normalizeOrigin(origin);
+      if (localPattern.test(origin) || CORS_ORIGINS.includes(reqOrigin)) {
         return callback(null, true);
       }
       return callback(new Error(`CORS blocked for origin: ${origin}`));
