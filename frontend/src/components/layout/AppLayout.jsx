@@ -22,7 +22,6 @@ const baseNav = [
   { to: '/messages', labelKey: 'messenger', Icon: MessageCircle },
   { to: '/sessions', labelKey: 'sessions', Icon: KeyRound },
   { to: '/security', labelKey: 'security', Icon: Shield },
-  { to: '/assistant', labelKey: 'assistantNav', Icon: Sparkles },
   { to: '/settings', labelKey: 'settings', Icon: Settings }
 ];
 
@@ -86,18 +85,32 @@ export function AppLayout() {
 
             <div className="flex flex-wrap items-center justify-end gap-2">
               {token ? (
-                <Link
-                  to="/notifications"
-                  className="relative inline-flex h-9 w-9 items-center justify-center rounded-lg border border-border-subtle bg-surface-raised text-content-muted transition hover:border-border hover:text-content focus:outline-none focus:ring-2 focus:ring-accent/40"
-                  aria-label={t.notifications}
-                >
-                  <Bell className="h-4 w-4" aria-hidden />
-                  {unread > 0 ? (
-                    <span className="absolute -right-1 -top-1 flex h-4 min-w-[1rem] items-center justify-center rounded-full bg-danger px-1 text-[10px] font-bold leading-none text-white">
-                      {unread > 9 ? '9+' : unread}
-                    </span>
-                  ) : null}
-                </Link>
+                <>
+                  <Link
+                    to="/notifications"
+                    className="relative inline-flex h-9 w-9 items-center justify-center rounded-lg border border-border-subtle bg-surface-raised text-content-muted transition hover:border-border hover:text-content focus:outline-none focus:ring-2 focus:ring-accent/40"
+                    aria-label={t.notifications}
+                  >
+                    <Bell className="h-4 w-4" aria-hidden />
+                    {unread > 0 ? (
+                      <span className="absolute -right-1 -top-1 flex h-4 min-w-[1rem] items-center justify-center rounded-full bg-danger px-1 text-[10px] font-bold leading-none text-white">
+                        {unread > 9 ? '9+' : unread}
+                      </span>
+                    ) : null}
+                  </Link>
+                  <NavLink
+                    to="/assistant"
+                    className={({ isActive }) =>
+                      [
+                        'inline-flex h-9 w-9 items-center justify-center rounded-lg border border-border-subtle bg-surface-raised text-content-muted transition hover:border-border hover:text-content focus:outline-none focus:ring-2 focus:ring-accent/40',
+                        isActive ? 'border-accent/50 text-accent shadow-glow' : ''
+                      ].join(' ')
+                    }
+                    aria-label={t.assistantNav}
+                  >
+                    <Sparkles className="h-4 w-4" aria-hidden />
+                  </NavLink>
+                </>
               ) : null}
               <button
                 type="button"
