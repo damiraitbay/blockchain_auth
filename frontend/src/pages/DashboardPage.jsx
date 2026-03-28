@@ -262,14 +262,8 @@ export function DashboardPage() {
         {wallet.hasWalletConnect ? (
           <p className="mt-3 text-xs leading-relaxed text-content-muted">{t.connectQrHint}</p>
         ) : null}
-        {!wallet.hasInjectedProvider && wallet.hasWalletConnect ? (
-          <p className="mt-3 text-sm leading-relaxed text-content-muted">{t.noBrowserWalletBody}</p>
-        ) : null}
         {!wallet.hasInjectedProvider && !wallet.hasWalletConnect ? (
-          <div className="mt-4 rounded-xl border border-border-subtle bg-surface/60 p-4">
-            <p className="text-sm font-semibold text-content">{t.noBrowserWalletTitle}</p>
-            <p className="mt-2 text-sm leading-relaxed text-content-muted">{t.wcNotConfiguredBody}</p>
-          </div>
+          <p className="mt-3 text-sm text-content-muted">{t.installWallet}</p>
         ) : null}
       </div>
     </div>
