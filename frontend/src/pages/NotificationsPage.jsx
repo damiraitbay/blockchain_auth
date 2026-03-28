@@ -56,7 +56,11 @@ export function NotificationsPage() {
       </div>
 
       <div className="rounded-2xl border border-border-subtle bg-surface-raised shadow-card">
-        {query.isLoading ? (
+        {!token ? (
+          <div className="px-6 py-14 text-center">
+            <p className="text-sm text-content-muted">{t.connectFirst}</p>
+          </div>
+        ) : query.isLoading ? (
           <div className="p-6">
             <SkeletonLines />
           </div>

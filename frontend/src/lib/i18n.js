@@ -196,8 +196,11 @@ export const i18n = {
         checkingApi: 'Тексеру…',
         notifications: 'Хабарламалар',
         notificationsHint: 'Қауіпсіздік оқиғалары, басқа құрылғыдан кіру.',
-        noNotifications: 'Хабарлама жоқ',
-        markAllRead: 'Барлығын оқылған деп белгілеу',
+    noNotifications: 'Хабарлама жоқ',
+    notificationsLoadFailed: 'Хабарламаларды жүктеу сәтсіз аяқталды.',
+    notificationsLoadFailedHint:
+      'Vercel баптауларында VITE_API_BASE_URL (backend URL) және серверде CORS_ORIGINS (осы сайттың URL) тексеріңіз.',
+    markAllRead: 'Барлығын оқылған деп белгілеу',
         unread: 'Оқылмаған',
         adminPanel: 'Админ',
         adminHint: 'Жалпы статистика (тек admin рөлі).',
