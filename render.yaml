@@ -1,0 +1,41 @@
+# Blueprint: https://render.com/docs/infrastructure-as-code
+# Dashboard → New → Blueprint → выбрать репозиторий (файл в корне репо).
+#
+# Либо вручную: Web Service → Root Directory = backend, Build = npm install,
+# Start = npm run start:render, добавить PostgreSQL и связать DATABASE_URL.
+
+databases:
+  - name: blockchain-auth-db
+    region: frankfurt
+    plan: free
+    databaseName: blockchain_auth
+
+services:
+  - type: web
+    name: blockchain-auth-backend
+    runtime: node
+    region: frankfurt
+    plan: free
+    rootDir: backend
+    buildCommand: npm install
+    startCommand: npm run start:render
+    healthCheckPath: /api/health
+    envVars:
+      - key: NODE_ENV
+        value: production
+      - key: DATABASE_URL
+        fromDatabase:
+          name: blockchain-auth-db
+          property: connectionString
+      - key: JWT_SECRET
+        sync: false
+      - key: APP_DOMAIN
+        sync: false
+      - key: CORS_ORIGINS
+        sync: false
+      - key: ADMIN_ADDRESSES
+        sync: false
+      - key: GEMINI_API_KEY
+        sync: false
+      - key: GEMINI_MODEL
+        value: gemini-2.5-flash
