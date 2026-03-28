@@ -43,8 +43,8 @@ export function Web3AuthProvider({ children }) {
         setStatus(t.useQrInstead);
         toast.error(t.useQrInstead);
       } else {
-        setStatus(t.installWallet);
-        toast.error(t.installWallet);
+        setStatus(t.wcProjectMissing);
+        toast.error(t.wcProjectMissing);
       }
       return;
     }
@@ -79,8 +79,8 @@ export function Web3AuthProvider({ children }) {
     }
     const eip1193 = wallet.getEip1193Provider();
     if (!eip1193) {
-      setStatus(t.installWallet);
-      toast.error(t.installWallet);
+      setStatus(t.connectFirst);
+      toast.error(t.connectFirst);
       return;
     }
     if (!wallet.isSupportedChain) {

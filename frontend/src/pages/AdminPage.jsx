@@ -87,6 +87,16 @@ export function AdminPage() {
             )}
           </p>
           <div className="flex flex-col gap-3 sm:flex-row sm:flex-wrap">
+            {!wallet.hasInjectedProvider && wallet.hasWalletConnect ? (
+              <button
+                type="button"
+                onClick={connectQr}
+                className="inline-flex items-center justify-center gap-2 rounded-xl bg-accent px-4 py-3 text-sm font-semibold text-on-accent shadow-sm transition hover:bg-accent-hover focus:outline-none focus:ring-2 focus:ring-accent focus:ring-offset-2 focus:ring-offset-surface"
+              >
+                <QrCode className="h-4 w-4" aria-hidden />
+                {t.connectQr}
+              </button>
+            ) : null}
             {wallet.hasInjectedProvider ? (
               <button
                 type="button"
@@ -97,7 +107,7 @@ export function AdminPage() {
                 {t.connectWallet}
               </button>
             ) : null}
-            {wallet.hasWalletConnect ? (
+            {wallet.hasInjectedProvider && wallet.hasWalletConnect ? (
               <button
                 type="button"
                 onClick={connectQr}
@@ -117,6 +127,18 @@ export function AdminPage() {
               {t.signIn}
             </button>
           </div>
+          {wallet.hasWalletConnect ? (
+            <p className="mt-3 text-xs leading-relaxed text-content-muted">{t.connectQrHint}</p>
+          ) : null}
+          {!wallet.hasInjectedProvider && wallet.hasWalletConnect ? (
+            <p className="mt-2 text-sm leading-relaxed text-content-muted">{t.noBrowserWalletBody}</p>
+          ) : null}
+          {!wallet.hasInjectedProvider && !wallet.hasWalletConnect ? (
+            <div className="mt-4 rounded-xl border border-border-subtle bg-surface/60 p-4">
+              <p className="text-sm font-semibold text-content">{t.noBrowserWalletTitle}</p>
+              <p className="mt-2 text-sm leading-relaxed text-content-muted">{t.wcNotConfiguredBody}</p>
+            </div>
+          ) : null}
           <p className="mt-4 text-xs text-content-faint">
             <Link to="/dashboard" className="text-accent underline-offset-2 hover:underline">
               ← {t.dashboard}
