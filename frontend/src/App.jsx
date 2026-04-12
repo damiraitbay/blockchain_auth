@@ -1,5 +1,6 @@
 import { Navigate, Route, Routes } from 'react-router-dom';
 import { AppLayout } from './components/layout/AppLayout.jsx';
+import { LandingPage } from './pages/LandingPage.jsx';
 import { DashboardPage } from './pages/DashboardPage.jsx';
 import { ProfilePage } from './pages/ProfilePage.jsx';
 import { SessionsPage } from './pages/SessionsPage.jsx';
@@ -13,8 +14,8 @@ import { AssistantPage } from './pages/AssistantPage.jsx';
 export default function App() {
   return (
     <Routes>
-      <Route path="/" element={<AppLayout />}>
-        <Route index element={<Navigate to="/dashboard" replace />} />
+      <Route path="/" element={<LandingPage />} />
+      <Route element={<AppLayout />}>
         <Route path="dashboard" element={<DashboardPage />} />
         <Route path="messages" element={<MessagesPage />} />
         <Route path="messages/:peer" element={<MessagesPage />} />

@@ -119,7 +119,53 @@ export const i18n = {
         adminLoginTitle: 'Вход администратора',
         adminLoginSubtitle: 'Подключите кошелёк, который указан в ADMIN_ADDRESSES на сервере, и войдите по подписи — роль admin выдаётся только так.',
         adminNotInList: 'Этот адрес не в списке администраторов на сервере. Добавьте его в ADMIN_ADDRESSES в .env и войдите снова.',
-        adminOpenPanel: 'Открыть панель'
+        adminOpenPanel: 'Открыть панель',
+        landingHeaderTagline: 'Кабинет и инструкция на одной странице',
+        landingNavAria: 'Разделы лендинга',
+        landingNavHow: 'Как пользоваться',
+        landingNavFeatures: 'Возможности',
+        landingOpenApp: 'Открыть приложение',
+        landingHeroEyebrow: 'Web3 без пароля',
+        landingHeroTitle: 'Вход по подписи кошелька — и вы в сервисе',
+        landingHeroLead:
+            'Подключите MetaMask или мобильный кошелёк по QR (WalletConnect), подпишите challenge — и работайте с профилем, сообщениями и уведомлениями в одном кабинете.',
+        landingHeroCta: 'Перейти в кабинет',
+        landingHeroHowLink: 'Смотреть шаги',
+        landingHowTitle: 'Как начать',
+        landingHowLead: 'Короткая дорожка: кошелёк → сеть → подпись → кабинет. Детали и кнопки — на странице «Обзор».',
+        landingStepLabel: 'Шаг',
+        landingStep1Title: 'Кошелёк',
+        landingStep1Body:
+            'Установите расширение MetaMask или нажмите «Вход по QR» на обзоре и отсканируйте код в мобильном приложении кошелька.',
+        landingStep2Title: 'Поддерживаемая сеть',
+        landingStep2Body:
+            'Выберите сеть, которую ожидает приложение. Если сеть неверная, на обзоре появится кнопка переключения.',
+        landingStep3Title: 'Подпись для входа',
+        landingStep3Body:
+            'Подтвердите сообщение в кошельке. Сервер проверяет подпись и выдаёт сессию (access/refresh), без пароля.',
+        landingStep4Title: 'Кабинет',
+        landingStep4Body:
+            'Профиль, сессии, безопасность, язык и тема — в меню. Сообщения, уведомления и AI-помощник доступны после входа.',
+        landingHowNote:
+            'Совет: держите включённым бэкенд и проверьте VITE_API_BASE_URL и CORS, если запросы не проходят.',
+        landingFeaturesTitle: 'Что внутри',
+        landingFeaturesLead: 'Один адрес кошелька — ваш идентификатор. Управляйте данными и доступом из интерфейса.',
+        landingFeatOverviewTitle: 'Обзор и сеть',
+        landingFeatOverviewDesc: 'Статус кошелька, chain id, баланс и блок через RPC — без лишних транзакций в блокчейн.',
+        landingFeatSessionsTitle: 'Сессии',
+        landingFeatSessionsDesc: 'Refresh-токены, выход с одного устройства или «везде», контроль активных входов.',
+        landingFeatMessengerTitle: 'Сообщения',
+        landingFeatMessengerDesc: 'Переписка между зарегистрированными пользователями: укажите адрес получателя и откройте чат.',
+        landingFeatNotificationsTitle: 'Уведомления',
+        landingFeatNotificationsDesc: 'События безопасности, в том числе вход с другого устройства — с меткой прочитано.',
+        landingFeatPrivacyTitle: 'Данные и аккаунт',
+        landingFeatPrivacyDesc: 'Экспорт данных в CSV и удаление аккаунта — в разделе настроек после авторизации (GDPR).',
+        landingFeatAssistantTitle: 'AI-помощник',
+        landingFeatAssistantDesc: 'Ответы по устройству приложения, API и безопасности — на базе документации в репозитории.',
+        landingBottomTitle: 'Готовы войти?',
+        landingBottomLead: 'Основной сценарий — на «Обзоре»: подключение, подпись, статус API и ончейн-данные.',
+        landingBottomCta: 'Открыть Blockchain Auth',
+        landingFooterCopy: 'Blockchain Auth — Web3-аутентификация по подписи кошелька.'
     },
     kz: {
         appTitle: 'Blockchain Auth',
@@ -242,6 +288,52 @@ export const i18n = {
         adminLoginTitle: 'Әкімші кіруі',
         adminLoginSubtitle: 'Сервердегі ADMIN_ADDRESSES тізіміндегі әмиянды қосыңыз және қолтаңбамен кіріңіз — admin тек осылай беріледі.',
         adminNotInList: 'Бұл мекенжай әкімшілер тізімінде емес. .env ішіне ADMIN_ADDRESSES қосып, қайта кіріңіз.',
-        adminOpenPanel: 'Панельді ашу'
+        adminOpenPanel: 'Панельді ашу',
+        landingHeaderTagline: 'Нұсқаулық пен кабинет бір бетте',
+        landingNavAria: 'Лендинг бөлімдері',
+        landingNavHow: 'Қалай қолдану керек',
+        landingNavFeatures: 'Мүмкіндіктер',
+        landingOpenApp: 'Қосымшаны ашу',
+        landingHeroEyebrow: 'Web3 — парольсіз',
+        landingHeroTitle: 'Әмиян қолтаңбасымен кіріңіз — сервисте жұмыс істеңіз',
+        landingHeroLead:
+            'MetaMask немесе WalletConnect арқылы мобильді әмиянды QR бойынша қосыңыз, challenge қолтаңбалаңыз — профиль, хабарламалар және хабарландырулар бір кабинетте.',
+        landingHeroCta: 'Кабинетке өту',
+        landingHeroHowLink: 'Қадамдарды көру',
+        landingHowTitle: 'Қалай бастау керек',
+        landingHowLead: 'Қысқа жол: әмиян → желі → қолтаңба → кабинет. Толығырағы мен батырмалар — «Шолу» бетінде.',
+        landingStepLabel: 'Қадам',
+        landingStep1Title: 'Әмиян',
+        landingStep1Body:
+            'MetaMask кеңейтілмесін орнатыңыз немесе шолуда «QR арқылы кіру» батырмасын басып, мобильді әмиянда сканерлеңіз.',
+        landingStep2Title: 'Қолданылатын желі',
+        landingStep2Body:
+            'Қосымша күтетін желіні таңдаңыз. Желісі дұрыс емес болса, шолуда ауыстыру батырмасы пайда болады.',
+        landingStep3Title: 'Кіру қолтаңбасы',
+        landingStep3Body:
+            'Әмиянда хабарламаны растаңыз. Сервер қолтаңбаны тексеріп, сессия береді (access/refresh), парольсіз.',
+        landingStep4Title: 'Кабинет',
+        landingStep4Body:
+            'Профиль, сессиялар, қауіпсіздік, тіл және тема — мәзірде. Хабарламалар, хабарландырулар және AI-көмекші кіргеннен кейін қолжетімді.',
+        landingHowNote:
+            'Кеңес: backend іске қосылғанын тексеріңіз; сұраулар өтпесе VITE_API_BASE_URL және CORS қараңыз.',
+        landingFeaturesTitle: 'Ішінде не бар',
+        landingFeaturesLead: 'Бір әмиян мекенжайы — сіздің идентификаторыңыз. Деректер мен қолжетімдікті интерфейстен басқарыңыз.',
+        landingFeatOverviewTitle: 'Шолу және желі',
+        landingFeatOverviewDesc: 'Әмиян күйі, chain id, баланс және блок RPC арқылы — блокчейнге артық транзакция жоқ.',
+        landingFeatSessionsTitle: 'Сессиялар',
+        landingFeatSessionsDesc: 'Refresh токендер, бір құрылғыдан немесе «барлық жерден» шығу, белсенді кірулерді бақылау.',
+        landingFeatMessengerTitle: 'Хабарламалар',
+        landingFeatMessengerDesc: 'Тіркелген пайдаланушылар арасындағы сөйлесу: алушы мекенжайын енгізіп, чатты ашыңыз.',
+        landingFeatNotificationsTitle: 'Хабарландырулар',
+        landingFeatNotificationsDesc: 'Қауіпсіздік оқиғалары, басқа құрылғыдан кіру — оқылған белгісімен.',
+        landingFeatPrivacyTitle: 'Деректер мен аккаунт',
+        landingFeatPrivacyDesc: 'CSV экспорт және аккаунтты жою — авторизациядан кейін баптауларда (GDPR).',
+        landingFeatAssistantTitle: 'AI-көмекші',
+        landingFeatAssistantDesc: 'Қосымша құрылымы, API және қауіпсіздік туралы жауаптар — репозиторийдегі сипаттама негізінде.',
+        landingBottomTitle: 'Кіруге дайынсыз ба?',
+        landingBottomLead: 'Негізгі сценарий — «Шолуда»: қосу, қолтаңба, API күйі және ончейн деректер.',
+        landingBottomCta: 'Blockchain Auth ашу',
+        landingFooterCopy: 'Blockchain Auth — әмиян қолтаңбасымен Web3 кіру.'
     }
 };
