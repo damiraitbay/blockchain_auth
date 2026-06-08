@@ -241,8 +241,30 @@ function authMiddleware(req, res, next) {
   }
 }
 
+function isAdminAddress(address) {
+  try {
+    return ADMIN_ADDRESSES.has(ethers.getAddress(String(address)));
+  } catch {
+    return false;
+  }
+}
+
+function resolveUserRole(address) {
+  return isAdminAddress(address) ? 'admin' : 'user';
+}
+
+async function syncUserRoleFromEnv(address) {
+  const role = resolveUserRole(address);
+  const user = await getUser(address);
+  if (user && user.role !== role) {
+    await setUserRole(address, role);
+    return { ...user, role };
+  }
+  return user;
+}
+
 function requireAdmin(req, res, next) {
-  if (req.user.role !== 'admin') {
+  if (!isAdminAddress(req.user.address)) {
     return res.status(403).json({ error: 'admin access required' });
   }
   return next();
@@ -356,9 +378,7 @@ app.post('/api/authenticate', async (req, res) => {
       userAgent
     });
 
-    if (ADMIN_ADDRESSES.has(checksum)) {
-      await setUserRole(checksum, 'admin');
-    }
+    await setUserRole(checksum, resolveUserRole(checksum));
 
     const user = await getUser(checksum);
     if (!user) {
@@ -410,7 +430,7 @@ app.post('/api/refresh', async (req, res) => {
       return res.status(401).json({ error: 'refresh token expired' });
     }
 
-    const user = await getUser(payload.sub);
+    let user = await getUser(payload.sub);
     if (!user) {
       return res.status(401).json({ error: 'user not found' });
     }
@@ -428,6 +448,7 @@ app.post('/api/refresh', async (req, res) => {
       userAgent: String(req.headers['user-agent'] || '').slice(0, 2000)
     });
 
+    user = (await syncUserRoleFromEnv(payload.sub)) || user;
     const token = createAccessToken(payload.sub, user.role);
 
     return res.json({
@@ -468,10 +489,11 @@ app.post('/api/sessions/revoke', authMiddleware, async (req, res) => {
 });
 
 app.get('/api/session', authMiddleware, async (req, res) => {
-  const user = await getUser(req.user.address);
+  let user = await getUser(req.user.address);
   if (!user) {
     return res.status(404).json({ error: 'user not found' });
   }
+  user = (await syncUserRoleFromEnv(req.user.address)) || user;
   return res.json({ user: publicUserView(user) });
 });
 
