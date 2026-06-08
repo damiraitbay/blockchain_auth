@@ -10,15 +10,13 @@ import {
   Sun,
   Moon,
   Bell,
-  Sparkles,
-  Home
+  Sparkles
 } from 'lucide-react';
 import { usePreferences } from '../../context/PreferencesContext.jsx';
 import { useWeb3Auth } from '../../context/Web3AuthContext.jsx';
 import { fetchNotifications } from '../../lib/api.js';
 
 const baseNav = [
-  { to: '/', labelKey: 'navHome', Icon: Home, end: true },
   { to: '/profile', labelKey: 'profile', Icon: User },
   { to: '/dashboard', labelKey: 'dashboard', Icon: LayoutDashboard },
   { to: '/messages', labelKey: 'messenger', Icon: MessageCircle },
@@ -27,11 +25,10 @@ const baseNav = [
   { to: '/settings', labelKey: 'settings', Icon: Settings }
 ];
 
-function NavIcon({ to, label, Icon, end = false }) {
+function NavIcon({ to, label, Icon }) {
   return (
     <NavLink
       to={to}
-      end={end}
       className={({ isActive }) =>
         [
           'group flex items-center gap-3 rounded-xl px-3 py-2.5 text-sm font-medium transition-colors',
@@ -126,8 +123,8 @@ export function AppLayout() {
           </div>
 
           <nav className="hidden lg:flex lg:flex-col lg:gap-1" aria-label="Main">
-            {navItems.map(({ to, labelKey, Icon, end }) => (
-              <NavIcon key={to} to={to} label={t[labelKey]} Icon={Icon} end={end} />
+            {navItems.map(({ to, labelKey, Icon }) => (
+              <NavIcon key={to} to={to} label={t[labelKey]} Icon={Icon} />
             ))}
           </nav>
         </header>
@@ -145,11 +142,10 @@ export function AppLayout() {
           aria-label="Main mobile"
         >
           <div className="mx-auto flex max-w-6xl justify-around rounded-t-2xl px-1 pt-1 pb-[max(0.5rem,env(safe-area-inset-bottom))]">
-            {navItems.map(({ to, labelKey, Icon, end }) => (
+            {navItems.map(({ to, labelKey, Icon }) => (
               <NavLink
                 key={to}
                 to={to}
-                end={end}
                 className={({ isActive }) =>
                   [
                     'flex min-w-0 flex-1 flex-col items-center gap-1 rounded-xl px-1 py-2 text-[10px] font-medium transition-colors',

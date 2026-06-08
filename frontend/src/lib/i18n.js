@@ -2,7 +2,6 @@ export const i18n = {
     ru: {
         appTitle: 'Blockchain Auth',
         appSubtitle: 'Web3-аутентификация по подписи кошелька',
-        navHome: 'Главная',
         dashboard: 'Обзор',
         profile: 'Профиль',
         sessions: 'Сессии',
@@ -173,7 +172,6 @@ export const i18n = {
     kz: {
         appTitle: 'Blockchain Auth',
         appSubtitle: 'Әмиян қолтаңбасымен Web3 кіру',
-        navHome: 'Басты бет',
         dashboard: 'Шолу',
         profile: 'Профиль',
         sessions: 'Сессиялар',
