@@ -26,8 +26,8 @@ function Header() {
     <header className="sticky top-0 z-50 border-b border-border-subtle/80 bg-surface-raised/90 backdrop-blur-md supports-[backdrop-filter]:bg-surface-raised/75">
       <div className="mx-auto max-w-6xl px-4 py-3 sm:px-6 sm:py-3.5">
         <div className="flex items-center justify-between gap-3">
-          <a
-            href="#top"
+          <Link
+            to="/"
             className="flex min-w-0 max-w-[min(100%,16rem)] items-center gap-2.5 rounded-xl outline-none focus-visible:ring-2 focus-visible:ring-accent/40 sm:max-w-none sm:gap-3"
           >
             <div className="flex h-9 w-9 shrink-0 items-center justify-center overflow-hidden rounded-xl bg-accent-muted ring-1 ring-accent/25 ring-offset-2 ring-offset-surface-raised sm:h-10 sm:w-10 sm:rounded-2xl">
@@ -39,7 +39,7 @@ function Header() {
                 {t.landingHeaderTagline}
               </p>
             </div>
-          </a>
+          </Link>
 
           <nav className="hidden items-center gap-1 md:flex" aria-label={t.landingNavAria}>
             <a href="#how-it-works" className="rounded-lg px-3 py-2 text-sm font-medium text-content-muted transition hover:bg-surface-overlay hover:text-content">

@@ -10,13 +10,15 @@ import {
   Sun,
   Moon,
   Bell,
-  Sparkles
+  Sparkles,
+  Home
 } from 'lucide-react';
 import { usePreferences } from '../../context/PreferencesContext.jsx';
 import { useWeb3Auth } from '../../context/Web3AuthContext.jsx';
 import { fetchNotifications } from '../../lib/api.js';
 
 const baseNav = [
+  { to: '/', labelKey: 'navHome', Icon: Home, end: true },
   { to: '/profile', labelKey: 'profile', Icon: User },
   { to: '/dashboard', labelKey: 'dashboard', Icon: LayoutDashboard },
   { to: '/messages', labelKey: 'messenger', Icon: MessageCircle },
@@ -25,10 +27,11 @@ const baseNav = [
   { to: '/settings', labelKey: 'settings', Icon: Settings }
 ];
 
-function NavIcon({ to, label, Icon }) {
+function NavIcon({ to, label, Icon, end = false }) {
   return (
     <NavLink
       to={to}
+      end={end}
       className={({ isActive }) =>
         [
           'group flex items-center gap-3 rounded-xl px-3 py-2.5 text-sm font-medium transition-colors',
@@ -73,7 +76,10 @@ export function AppLayout() {
       <div className="relative z-[1] mx-auto flex min-h-dvh w-full max-w-6xl flex-col px-4 pb-24 pt-6 sm:px-6 lg:flex-row lg:gap-10 lg:pb-10 lg:pt-8">
         <header className="mb-8 flex shrink-0 flex-col gap-6 lg:sticky lg:top-8 lg:mb-0 lg:h-fit lg:w-56 lg:self-start lg:pt-2">
           <div className="flex items-start justify-between gap-4 lg:flex-col lg:items-stretch">
-            <div className="flex items-center gap-3">
+            <Link
+              to="/"
+              className="flex items-center gap-3 rounded-2xl outline-none transition hover:opacity-90 focus-visible:ring-2 focus-visible:ring-accent/40"
+            >
               <div className="flex h-11 w-11 items-center justify-center overflow-hidden rounded-2xl bg-accent-muted ring-1 ring-accent/25 ring-offset-2 ring-offset-surface">
                 <img src="/favicon.svg" alt="" width={44} height={44} className="h-full w-full object-cover" />
               </div>
@@ -81,7 +87,7 @@ export function AppLayout() {
                 <h1 className="text-lg font-semibold tracking-tight text-content">{t.appTitle}</h1>
                 <p className="mt-0.5 text-sm leading-snug text-content-muted">{t.appSubtitle}</p>
               </div>
-            </div>
+            </Link>
 
             <div className="flex flex-wrap items-center justify-end gap-2">
               <Link
@@ -120,8 +126,8 @@ export function AppLayout() {
           </div>
 
           <nav className="hidden lg:flex lg:flex-col lg:gap-1" aria-label="Main">
-            {navItems.map(({ to, labelKey, Icon }) => (
-              <NavIcon key={to} to={to} label={t[labelKey]} Icon={Icon} />
+            {navItems.map(({ to, labelKey, Icon, end }) => (
+              <NavIcon key={to} to={to} label={t[labelKey]} Icon={Icon} end={end} />
             ))}
           </nav>
         </header>
@@ -139,10 +145,11 @@ export function AppLayout() {
           aria-label="Main mobile"
         >
           <div className="mx-auto flex max-w-6xl justify-around rounded-t-2xl px-1 pt-1 pb-[max(0.5rem,env(safe-area-inset-bottom))]">
-            {navItems.map(({ to, labelKey, Icon }) => (
+            {navItems.map(({ to, labelKey, Icon, end }) => (
               <NavLink
                 key={to}
                 to={to}
+                end={end}
                 className={({ isActive }) =>
                   [
                     'flex min-w-0 flex-1 flex-col items-center gap-1 rounded-xl px-1 py-2 text-[10px] font-medium transition-colors',
