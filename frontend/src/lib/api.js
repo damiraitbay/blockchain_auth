@@ -203,9 +203,7 @@ export async function downloadMyDataExport(token) {
         (Object.prototype.hasOwnProperty.call(data, 'exportedAt') ||
           Object.prototype.hasOwnProperty.call(data, 'notifications'))
       ) {
-        throw new Error(
-          'Сервер отдал JSON (старый формат экспорта). Перезапустите backend с export CSV и скачайте снова.'
-        );
+        throw new Error('EXPORT_OLD_FORMAT');
       }
     } catch (e) {
       if (e instanceof SyntaxError) {

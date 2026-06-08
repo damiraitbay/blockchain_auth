@@ -74,14 +74,14 @@ export function AssistantPage() {
           {messages.map((m, i) => (
             <div
               key={i}
-              className={`flex ${m.role === 'user' ? 'justify-end' : 'justify-start'}`}
+              className={`flex w-full ${m.role === 'user' ? 'justify-end' : 'justify-start'}`}
             >
               <div
                 className={[
-                  'max-w-[min(100%,42rem)] rounded-2xl px-4 py-3 text-sm leading-relaxed',
+                  'max-w-[min(85%,20rem)] rounded-2xl px-4 py-3 text-sm leading-relaxed',
                   m.role === 'user'
-                    ? 'bg-accent text-on-accent'
-                    : 'border border-border-subtle bg-surface text-content'
+                    ? 'rounded-br-sm bg-accent text-on-accent'
+                    : 'rounded-bl-sm border border-border-subtle bg-surface text-content'
                 ].join(' ')}
               >
                 <p className="whitespace-pre-wrap break-words">{m.content}</p>

@@ -1,0 +1,10 @@
+{
+  "name": "blockchain-project",
+  "private": true,
+  "scripts": {
+    "pdf:presentation": "node scripts/generate-presentation-pdf.mjs"
+  },
+  "devDependencies": {
+    "puppeteer": "^24.6.0"
+  }
+}

@@ -5,8 +5,8 @@ import { getAddress, isAddress } from 'ethers';
 import { MessageCircle, Send } from 'lucide-react';
 import { useWeb3Auth } from '../context/Web3AuthContext.jsx';
 import { usePreferences } from '../context/PreferencesContext.jsx';
-import { fetchChatConversations, fetchChatMessages, postChatMessage } from '../lib/api.js';
-import { getFriendlyError, shortAddress } from '../lib/utils.js';
+import { fetchChatConversations, fetchChatMessages, fetchSession, postChatMessage } from '../lib/api.js';
+import { getFriendlyError, sameAddress, shortAddress } from '../lib/utils.js';
 
 export function MessagesPage() {
   const { t } = usePreferences();
@@ -32,6 +32,14 @@ export function MessagesPage() {
       navigate('/messages', { replace: true });
     }
   }, [peerParam, peer, navigate]);
+
+  const sessionQuery = useQuery({
+    queryKey: ['session', token],
+    queryFn: () => fetchSession(token),
+    enabled: Boolean(token)
+  });
+
+  const myAddress = sessionQuery.data?.address || wallet.account;
 
   const convQuery = useQuery({
     queryKey: ['chat-conversations', token],
@@ -178,18 +186,18 @@ export function MessagesPage() {
                   <p className="text-sm text-content-muted">{t.loading}</p>
                 ) : (msgQuery.data || []).length > 0 ? (
                   msgQuery.data.map((m) => {
-                    const mine = m.senderAddress === wallet.account;
+                    const mine = sameAddress(m.senderAddress, myAddress);
                     return (
                       <div
                         key={m.id}
-                        className={`flex ${mine ? 'justify-end' : 'justify-start'}`}
+                        className={`flex w-full ${mine ? 'justify-end' : 'justify-start'}`}
                       >
                         <div
                           className={[
-                            'max-w-[85%] rounded-2xl px-4 py-2 text-sm shadow-sm',
+                            'max-w-[min(85%,20rem)] rounded-2xl px-4 py-2.5 text-sm shadow-sm',
                             mine
-                              ? 'rounded-br-md bg-accent text-on-accent'
-                              : 'rounded-bl-md border border-border-subtle bg-surface text-content'
+                              ? 'rounded-br-sm bg-accent text-on-accent'
+                              : 'rounded-bl-sm border border-border-subtle bg-surface text-content'
                           ].join(' ')}
                         >
                           <p className="whitespace-pre-wrap break-words">{m.body}</p>

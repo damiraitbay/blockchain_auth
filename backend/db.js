@@ -9,10 +9,12 @@ export function getPool() {
     if (!url) {
       throw new Error('DATABASE_URL is not set. Start Postgres and configure .env (see .env.example).');
     }
+    const isProduction = (process.env.NODE_ENV || '').startsWith('prod');
     pool = new pg.Pool({
       connectionString: url,
       max: Number(process.env.PG_POOL_MAX || 20),
-      idleTimeoutMillis: 30_000
+      idleTimeoutMillis: 30_000,
+      ...(isProduction && { ssl: { rejectUnauthorized: false } })
     });
   }
   return pool;

@@ -105,7 +105,7 @@ export function SecurityPage() {
             <input
               value={deletePhrase}
               onChange={(e) => setDeletePhrase(e.target.value)}
-              placeholder="DELETE_MY_ACCOUNT"
+              placeholder={t.deleteConfirmPlaceholder}
               autoComplete="off"
               className="w-full rounded-xl border border-danger/30 bg-surface px-4 py-2 font-mono text-sm text-content focus:border-danger focus:outline-none focus:ring-2 focus:ring-danger/30"
             />
