@@ -112,7 +112,7 @@ export function MessagesPage() {
         <p className="mt-1 text-sm text-content-muted">{t.messengerHint}</p>
       </div>
 
-      <div className="flex min-h-[min(70dvh,640px)] flex-col overflow-hidden rounded-2xl border border-border-subtle bg-surface-raised shadow-card md:flex-row">
+      <div className="flex w-full min-h-[min(70dvh,640px)] flex-col overflow-hidden rounded-2xl border border-border-subtle bg-surface-raised shadow-card md:flex-row">
         <aside className="flex w-full shrink-0 flex-col border-border-subtle md:w-72 md:border-r">
           <form onSubmit={handleStartChat} className="border-b border-border-subtle p-3">
             <label className="block text-xs font-medium text-content-muted">{t.chatRecipient}</label>
@@ -169,7 +169,7 @@ export function MessagesPage() {
           </div>
         </aside>
 
-        <section className="flex min-h-[280px] min-w-0 flex-1 flex-col">
+        <section className="flex min-h-[280px] min-w-0 w-full flex-1 flex-col overflow-hidden">
           {!peer ? (
             <div className="flex flex-1 flex-col items-center justify-center gap-2 p-8 text-center text-content-muted">
               <MessageCircle className="h-10 w-10 opacity-40" aria-hidden />
@@ -181,23 +181,20 @@ export function MessagesPage() {
                 <p className="font-mono text-sm font-semibold text-content">{shortAddress(peer)}</p>
                 <p className="text-xs text-content-faint">{peer}</p>
               </div>
-              <div className="flex-1 space-y-3 overflow-y-auto p-4">
+              <div className="flex min-h-0 w-full flex-1 flex-col gap-3 overflow-y-auto p-4">
                 {msgQuery.isLoading ? (
                   <p className="text-sm text-content-muted">{t.loading}</p>
                 ) : (msgQuery.data || []).length > 0 ? (
                   msgQuery.data.map((m) => {
                     const mine = sameAddress(m.senderAddress, myAddress);
                     return (
-                      <div
-                        key={m.id}
-                        className={`flex w-full ${mine ? 'justify-end' : 'justify-start'}`}
-                      >
+                      <div key={m.id} className="w-full min-w-0">
                         <div
                           className={[
-                            'max-w-[min(85%,20rem)] rounded-2xl px-4 py-2.5 text-sm shadow-sm',
+                            'w-fit max-w-[85%] rounded-2xl px-4 py-2.5 text-sm shadow-sm sm:max-w-sm',
                             mine
-                              ? 'rounded-br-sm bg-accent text-on-accent'
-                              : 'rounded-bl-sm border border-border-subtle bg-surface text-content'
+                              ? 'ml-auto rounded-br-sm bg-accent text-on-accent'
+                              : 'mr-auto rounded-bl-sm border border-border-subtle bg-surface text-content'
                           ].join(' ')}
                         >
                           <p className="whitespace-pre-wrap break-words">{m.body}</p>

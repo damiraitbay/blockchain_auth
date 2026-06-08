@@ -65,23 +65,20 @@ export function AssistantPage() {
           <Sparkles className="h-5 w-5 text-accent" aria-hidden />
           <span className="text-sm font-semibold text-content">{t.assistantBadge}</span>
         </div>
-        <div className="flex-1 space-y-4 overflow-y-auto p-4">
-          <div className="flex justify-start">
-            <div className="max-w-[min(100%,42rem)] rounded-2xl border border-border-subtle bg-surface px-4 py-3 text-sm leading-relaxed text-content">
+        <div className="flex min-h-0 w-full flex-1 flex-col gap-4 overflow-y-auto p-4">
+          <div className="w-full min-w-0">
+            <div className="mr-auto w-fit max-w-[85%] rounded-2xl rounded-bl-sm border border-border-subtle bg-surface px-4 py-3 text-sm leading-relaxed text-content sm:max-w-sm">
               <p className="whitespace-pre-wrap break-words">{t.assistantWelcome}</p>
             </div>
           </div>
           {messages.map((m, i) => (
-            <div
-              key={i}
-              className={`flex w-full ${m.role === 'user' ? 'justify-end' : 'justify-start'}`}
-            >
+            <div key={i} className="w-full min-w-0">
               <div
                 className={[
-                  'max-w-[min(85%,20rem)] rounded-2xl px-4 py-3 text-sm leading-relaxed',
+                  'w-fit max-w-[85%] rounded-2xl px-4 py-3 text-sm leading-relaxed sm:max-w-sm',
                   m.role === 'user'
-                    ? 'rounded-br-sm bg-accent text-on-accent'
-                    : 'rounded-bl-sm border border-border-subtle bg-surface text-content'
+                    ? 'ml-auto rounded-br-sm bg-accent text-on-accent'
+                    : 'mr-auto rounded-bl-sm border border-border-subtle bg-surface text-content'
                 ].join(' ')}
               >
                 <p className="whitespace-pre-wrap break-words">{m.content}</p>
